@@ -1,0 +1,172 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated color tokens to match Desert Rose Tourism design */
+  --background: #fef7ed; /* Warm desert sand background */
+  --foreground: #374151; /* Dark gray for primary text */
+  --card: #ffffff; /* White for card backgrounds */
+  --card-foreground: #374151; /* Dark gray for card text */
+  --popover: #fef2f2; /* Light red tint for popovers */
+  --popover-foreground: #374151; /* Dark gray for popover text */
+  --primary: #dc2626; /* Red primary color like Desert Rose */
+  --primary-foreground: #ffffff; /* White text on primary */
+  --secondary: #f59e0b; /* Gold/amber secondary color */
+  --secondary-foreground: #ffffff; /* White text on secondary */
+  --muted: #fef2f2; /* Light red muted background */
+  --muted-foreground: #6b7280; /* Gray muted text */
+  --accent: #f59e0b; /* Gold accent color */
+  --accent-foreground: #ffffff; /* White text on accent */
+  --destructive: #dc2626; /* Red for destructive actions */
+  --destructive-foreground: #ffffff; /* White text on destructive */
+  --border: #e5e7eb; /* Light gray borders */
+  --input: #f9fafb; /* Light gray input backgrounds */
+  --ring: rgba(220, 38, 38, 0.5); /* Red focus ring */
+  --chart-1: #059669; /* Chart colors */
+  --chart-2: #10b981;
+  --chart-3: #0891b2;
+  --chart-4: #dc2626;
+  --chart-5: #f59e0b;
+  --radius: 0.5rem; /* Standard border radius */
+  --sidebar: #fef2f2; /* Light red sidebar */
+  --sidebar-foreground: #374151;
+  --sidebar-primary: #dc2626;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f59e0b;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: rgba(220, 38, 38, 0.5);
+}
+
+.dark {
+  --background: #1c1917; /* Warm dark desert background */
+  --foreground: #f9fafb;
+  --card: #292524; /* Warm dark card background */
+  --card-foreground: #f9fafb;
+  --popover: #292524; /* Warm dark popover background */
+  --popover-foreground: #f9fafb;
+  --primary: #ef4444;
+  --primary-foreground: #1f2937;
+  --secondary: #f59e0b;
+  --secondary-foreground: #1f2937;
+  --muted: #44403c; /* Warm dark muted background */
+  --muted-foreground: #9ca3af;
+  --accent: #f59e0b;
+  --accent-foreground: #1f2937;
+  --destructive: #dc2626;
+  --destructive-foreground: #f9fafb;
+  --border: #44403c; /* Warm dark borders */
+  --input: #44403c; /* Warm dark input backgrounds */
+  --ring: rgba(239, 68, 68, 0.5);
+  --chart-1: #059669;
+  --chart-2: #10b981;
+  --chart-3: #0891b2;
+  --chart-4: #ef4444;
+  --chart-5: #f59e0b;
+  --radius: 0.5rem; /* Standard border radius */
+  --sidebar: #292524; /* Warm dark sidebar */
+  --sidebar-foreground: #f9fafb;
+  --sidebar-primary: #ef4444;
+  --sidebar-primary-foreground: #1f2937;
+  --sidebar-accent: #f59e0b;
+  --sidebar-accent-foreground: #1f2937;
+  --sidebar-border: #44403c; /* Warm dark sidebar borders */
+  --sidebar-ring: rgba(239, 68, 68, 0.5);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Added custom font variables for Space Grotesk and DM Sans */
+  --font-space-grotesk: var(--font-space-grotesk);
+  --font-dm-sans: var(--font-dm-sans);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Added subtle desert texture pattern */
+    background-image: radial-gradient(circle at 1px 1px, rgba(245, 158, 11, 0.05) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+
+  /* Added font family utilities */
+  .font-space-grotesk {
+    font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .font-dm-sans {
+    font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Added consistent section backgrounds */
+  .desert-section {
+    @apply bg-background;
+  }
+
+  .desert-card {
+    @apply bg-card shadow-sm border border-border/50;
+  }
+
+  /* Line clamp utilities */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+}

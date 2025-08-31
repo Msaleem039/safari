@@ -1,0 +1,22 @@
+import { HeroSection } from "@/components/hero-section"
+import { TourPackages } from "@/components/tour-packages"
+import { FAQ } from "@/components/faq"
+import { ServicesSection } from "@/components/services-section"
+import { Footer } from "@/components/footer"
+import { apiService, Product } from "@/lib/api"
+
+export default async function HomePage() {
+  const response = await apiService.getAllProducts()
+  const products: Product[] = response.data || []
+console.log("products dd", products)
+  return (
+    <div className="min-h-screen">
+      <main>
+        <HeroSection />
+        <TourPackages products={products} />
+        <ServicesSection />
+        <FAQ />
+      </main>
+    </div>
+  )
+}
