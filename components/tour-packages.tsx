@@ -78,6 +78,7 @@ Please provide more information and help me with the booking process.`
               className="overflow-hidden hover:shadow-xl transition-all duration-300 bg-white border-0 shadow-md cursor-pointer h-full flex flex-col"
               onClick={() => (window.location.href = `/tours/${tour._id}`)}
             >
+              
               <CardHeader className="p-0 flex-shrink-0">
                 <div className="px-4 pt-4 pb-2 flex items-center justify-between">
                   <div className="text-left">
@@ -85,8 +86,10 @@ Please provide more information and help me with the booking process.`
                     <div className="flex items-baseline gap-1">
                       <span className="text-red-600 font-bold text-base font-space-grotesk">{tour.price}</span>
                       {/* <span className="text-[10px] text-gray-500 font-dm-sans">/Per Person</span> */}
+                      
                     </div>
                   </div>
+                
                   <Button
                     className="bg-yellow-400 hover:bg-yellow-500 text-black text-[10px] px-3 py-1 h-auto"
                     onClick={(e) => {
@@ -96,7 +99,11 @@ Please provide more information and help me with the booking process.`
                   >
                     BOOK NOW
                   </Button>
+                
                 </div>
+                <p className="text-[10px] mb-2 uppercase tracking-wide text-gray-500 font-dm-sans">
+                  {tour.type}
+                </p>
                 <div className="relative">
                   <Image
                     src={tour.image || "/placeholder.svg"}
@@ -112,13 +119,13 @@ Please provide more information and help me with the booking process.`
                 </div>
               </CardHeader>
 
-              <CardContent className="p-6 flex flex-col flex-grow">
-                <CardTitle className="text-xl mb-3 font-space-grotesk font-bold text-gray-900 leading-tight">
+              <CardContent className="p-3 flex flex-col flex-grow">
+                <CardTitle className="text-xl mb-1 font-space-grotesk font-bold text-gray-900 leading-tight">
                   {tour.title}
                 </CardTitle>
 
                 <div className="flex items-center gap-2 mb-3">
-                  <div className="flex items-center">
+                  {/* <div className="flex items-center">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
@@ -127,25 +134,22 @@ Please provide more information and help me with the booking process.`
                         }`}
                       />
                     ))}
-                  </div>
-                  <span className="text-sm text-gray-600 font-dm-sans font-medium">
+                  </div> */}
+                  {/* <span className="text-sm text-gray-600 font-dm-sans font-medium">
                     {tour.rating} ({tour.reviews} reviews)
-                  </span>
+                  </span> */}
                 </div>
-
-                <p className="text-gray-600 mb-4 font-dm-sans leading-relaxed text-sm">{tour.description}</p>
-
-                <div className="flex items-baseline justify-between mb-4">
-                  <div className="flex items-center gap-2">
+                 
+                <p className="text-gray-600 mb-2 font-dm-sans leading-relaxed text-sm">{tour.description}</p>
+                   
+                <div className="flex items-baseline justify-between">
+                  {/* <div className="flex items-center gap-2">
                     <span className="text-2xl font-bold text-red-600 font-space-grotesk">{tour.price}</span>
                     {/* <span className="text-sm text-gray-500 line-through font-dm-sans">{tour.originalPrice}</span> */}
-                  </div>
-                  <div className="flex items-center text-gray-500 text-sm">
-                    {/* <Users className="w-4 h-4 mr-1" /> */}
-                    {/* <span className="font-dm-sans">Per Person</span> */}
-                  </div>
+                
+                  
                 </div>
-
+                <p className="text-black  font-dm-sans leading-relaxed text-sm">What's Included</p>
                 {tour.inclusions && (
                   <ul className="mt-3 space-y-1 max-h-56 overflow-y-auto pr-1 flex-grow">
                     {tour.inclusions.map((item) => (

@@ -9,6 +9,7 @@ export default async function HomePage() {
   const response = await apiService.getAllProducts()
   const products: Product[] = response.data || []
 
+
   return (
     <div className="min-h-screen">
       <main>
