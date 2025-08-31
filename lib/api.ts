@@ -120,7 +120,7 @@ class ApiService {
       const response = await fetch(`${API_BASE_URL}/all`, {
         headers: this.getAuthHeaders(),
       });
-    console.log("response", response)
+    
       const result = await this.handleResponse<Product[]>(response);
       
       // Handle different response formats

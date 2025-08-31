@@ -37,7 +37,7 @@ export function BookingForm() {
     }
 
     // Here you would typically send the data to your backend
-    console.log("Booking submitted:", formData)
+   
     alert("Thank you for your booking request! We will contact you shortly to confirm your desert safari adventure.")
 
     // Reset form

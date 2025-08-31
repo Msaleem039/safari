@@ -6,7 +6,7 @@ import { apiService, Product } from "@/lib/api";
 export default async function ToursPage() {
   const response = await apiService.getAllProducts();
   const products: Product[] = response.data || [];
-console.log("products", products)
+
   return (
     <div className="min-h-screen">
       <Header />

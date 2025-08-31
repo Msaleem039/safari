@@ -44,7 +44,7 @@ export default function ProductsPage() {
       setError(null);
       const response = await axios.get('https://api.fsroyaldesertsafaridubai.com/api/all');
       setProducts(response.data.product);
-      console.log(response.data);
+     
     } catch (error: any) {
       setError(error.response?.data?.message || 'Failed to fetch products');
     } finally {

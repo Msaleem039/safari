@@ -8,7 +8,7 @@ import { apiService, Product } from "@/lib/api"
 export default async function HomePage() {
   const response = await apiService.getAllProducts()
   const products: Product[] = response.data || []
-console.log("products dd", products)
+
   return (
     <div className="min-h-screen">
       <main>

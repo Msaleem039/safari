@@ -11,7 +11,7 @@ import { apiService, Product } from "@/lib/api";
 
 export function TourPackages({ products }: { products: Product[] }) {
   const [expandedPackageId, setExpandedPackageId] = useState<string | null>(null)
-console.log("products", products)
+
   const handleBookNow = (tourTitle: string) => {
     const bookingSection = document.getElementById("booking-form")
     if (bookingSection) {

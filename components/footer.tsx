@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Facebook from "@/lib/Facebook"
 import Instagram from "@/lib/Instagram"
+import Link from "next/link"
 
 export function Footer() {
   return (
@@ -12,20 +13,16 @@ export function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Left Column - Brand Information */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">🐪</span>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-gray-900">SAFARI DESERT DUBAI</h3>
-                <p className="text-sm text-gray-600">سفاري ديزرت دبي</p>
-              </div>
-            </div>
-            <p className="text-sm text-gray-700 leading-relaxed">
-              You have come to the right place if you are looking for a thrill, fun, and ultimate outdoor adventure entertainment.
-            </p>
+          <Link href="/" className="flex items-center gap-2">
+          <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
+              <Image src="/logo.jpeg" alt="Logo" width={100} height={100} />
+      
           </div>
+          <div className="flex flex-col">
+            <span className="text-lg font-bold text-gray-800 leading-tight">Fs Royal Desert Safari Dubai</span>
+            <span className="text-xs text-gray-600">ADVENTURE TOURS</span>
+          </div>
+        </Link>
 
           {/* Middle Column - Newsletter Subscription */}
           <div className="space-y-4">
