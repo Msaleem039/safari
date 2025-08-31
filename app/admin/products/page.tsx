@@ -42,7 +42,7 @@ export default function ProductsPage() {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get('http://145.223.101.153/api/all');
+      const response = await axios.get('https://api.fsroyaldesertsafaridubai.com/api/all');
       setProducts(response.data.product);
       console.log(response.data);
     } catch (error: any) {
@@ -56,7 +56,7 @@ export default function ProductsPage() {
     if (window.confirm('Are you sure you want to delete this product?')) {
       setDeletingId(productId);
       try {
-        await axios.delete(`http://145.223.101.153/api/delete/${productId}`);
+        await axios.delete(`https://api.fsroyaldesertsafaridubai.com/api/delete/${productId}`);
         await fetchProducts(); // Refresh products list
       } catch (error: any) {
         setError(error.response?.data?.message || 'Failed to delete product');

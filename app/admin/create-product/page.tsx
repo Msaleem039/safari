@@ -137,7 +137,7 @@ export default function CreateProductPage() {
       }
   
       const response = await axios.post(
-        "http://145.223.101.153/api/product",
+        "https://api.fsroyaldesertsafaridubai.com/api/product",
         formData,
         {
           headers: {

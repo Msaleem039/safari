@@ -23,14 +23,14 @@ This admin panel allows you to manage tour packages and services for your Desert
 
 ## API Integration
 
-The admin panel connects to your backend API at `http://145.223.101.153/api/produc`:
+The admin panel connects to your backend API at `https://api.fsroyaldesertsafaridubai.com/api/produc`:
 
 - **GET** `/api/produc` - Fetch all products
 - **POST** `/api/produc` - Create new product
 
 ## Getting Started
 
-1. **Ensure your backend is running** at `http://145.223.101.153`
+1. **Ensure your backend is running** at `https://api.fsroyaldesertsafaridubai.com`
 2. **Navigate to the admin panel** at `/admin`
 3. **Use the sidebar navigation** to access different sections
 

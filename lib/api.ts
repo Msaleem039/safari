@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-const API_BASE_URL = 'http://145.223.101.153/api';
+const API_BASE_URL = 'https://api.fsroyaldesertsafaridubai.com/api';
 
 export interface ApiResponse<T = any> {
   success: boolean;

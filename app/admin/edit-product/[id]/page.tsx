@@ -56,7 +56,7 @@ export default function EditProductPage() {
       const fetchProduct = async () => {
         try {
           setIsLoading(true);
-          const response = await axios.get(`http://145.223.101.153/api/singleproduct/${id}`);
+          const response = await axios.get(`https://api.fsroyaldesertsafaridubai.com/api/singleproduct/${id}`);
           const product = response.data.product;
           reset({
             title: product.title,
@@ -146,7 +146,7 @@ export default function EditProductPage() {
           imageUrl: filteredData.imageUrl,
         };
 
-        await axios.put(`http://145.223.101.153/api/update/${id}`, payload, {
+        await axios.put(`https://api.fsroyaldesertsafaridubai.com/api/update/${id}`, payload, {
           headers: { 'Content-Type': 'application/json' },
         });
       } else {
@@ -159,7 +159,7 @@ export default function EditProductPage() {
         filteredData.inclusions.forEach((inc) => formData.append('inclusions[]', inc));
         formData.append('image', filteredData.imageFile);
 
-        await axios.put(`http://145.223.101.153/api/update/${id}`, formData, {
+        await axios.put(`https://api.fsroyaldesertsafaridubai.com/api/update/${id}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
       }
