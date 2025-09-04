@@ -3,6 +3,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 
 const posts = [
   {
@@ -52,8 +54,10 @@ const posts = [
 export default function BlogsPage() {
   return (
     <div className="min-h-screen bg-white">
+      <Header />
+      
       {/* Hero */}
-      <div className="relative h-72 md:h-96">
+      <div className="relative h-72 md:h-96 mt-20">
         <Image
           src="/dune-buggy-racing.png"
           alt="Blogs Hero"
@@ -107,6 +111,8 @@ export default function BlogsPage() {
           ))}
         </div>
       </section>
+      
+      <Footer />
     </div>
   )
 }

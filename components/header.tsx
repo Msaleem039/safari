@@ -7,9 +7,9 @@ import Instagram from "@/lib/Instagram"
 import Link from "next/link"
 import { useState } from "react"
 import Image from "next/image"
+import LanguageSelector from "@/components/language-selector"
 
 export function Header() {
-  const [currentLanguage, setCurrentLanguage] = useState("EN")
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const scrollToBooking = () => {
@@ -24,10 +24,7 @@ export function Header() {
     window.open(`https://wa.me/971507585440?text=${encodeURIComponent(message)}`, "_blank")
   }
 
-  const changeLanguage = (lang: string) => {
-    setCurrentLanguage(lang)
-    console.log(`Language changed to: ${lang}`)
-  }
+
 
   return (
     <header className="absolute top-0 left-0 right-0 z-50 bg-white">
@@ -49,7 +46,7 @@ export function Header() {
             HOME
           </Link>
 
-          <Link href="/about" className="text-orange-500 hover:text-orange-600 transition-colors font-medium">
+          <Link href="/about" className="text-gray-700 hover:text-orange-600 transition-colors font-medium">
             ABOUT US
           </Link>
 
@@ -57,18 +54,18 @@ export function Header() {
             <DropdownMenuTrigger className="flex items-center gap-1 text-gray-700 hover:text-orange-500 transition-colors font-medium">
               DESERT SAFARI TOURS <ChevronDown className="h-4 w-4" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem asChild>
+            <DropdownMenuContent className="min-w-[240px] bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg rounded-xl p-2">
+              <DropdownMenuItem asChild className="px-4 py-2.5 rounded-md text-gray-800 hover:bg-orange-50">
                 <Link href="/tours">All Desert Tours</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/tours#morning-safari">Morning Safari</Link>
+              <DropdownMenuItem asChild className="px-4 py-2.5 rounded-md text-gray-800 hover:bg-orange-50">
+                <Link href="/tours/morning-safari">Morning Safari</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/tours#evening-safari">Evening Safari</Link>
+              <DropdownMenuItem asChild className="px-4 py-2.5 rounded-md text-gray-800 hover:bg-orange-50">
+                <Link href="/tours/evening-safari">Evening Safari</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/tours#overnight-safari">Overnight Safari</Link>
+              <DropdownMenuItem asChild className="px-4 py-2.5 rounded-md text-gray-800 hover:bg-orange-50">
+                <Link href="/tours/overnight-safari">Overnight Safari</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -86,6 +83,7 @@ export function Header() {
           </Link>
 
           <div className="flex items-center gap-4 ml-4">
+            {/* <LanguageSelector /> */}
             <a
               href="https://www.facebook.com/share/164Yefp5JT/"
               target="_blank"
@@ -161,6 +159,7 @@ export function Header() {
               CONTACT US
             </Link>
             <div className="flex items-center gap-4 pt-2 border-t border-gray-200">
+           
               <a
                 href="https://www.facebook.com/share/164Yefp5JT/"
                 target="_blank"

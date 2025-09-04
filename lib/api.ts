@@ -118,6 +118,9 @@ class ApiService {
   async getAllProducts(): Promise<ApiResponse<Product[]>> {
     try {
       const response = await fetch(`${API_BASE_URL}/all`, {
+        // Ensure fresh data in production (disable Next.js fetch cache)
+        cache: 'no-store',
+        next: { revalidate: 0 },
         headers: this.getAuthHeaders(),
       });
     

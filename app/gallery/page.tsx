@@ -7,6 +7,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { X, ZoomIn } from "lucide-react"
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 
 const galleryImages = [
   {
@@ -106,12 +108,14 @@ export default function GalleryPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header />
+      
       {/* Hero Section */}
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="relative h-[40vh] bg-gradient-to-r from-orange-600  flex items-center justify-center"
+        className="relative h-[40vh] bg-gradient-to-r from-orange-600 flex items-center justify-center mt-20"
       >
         <div className="absolute inset-0 bg-black/20" />
         <motion.div
@@ -120,7 +124,7 @@ export default function GalleryPage() {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="relative z-10 text-center text-white"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 mt-20">Gallery</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">Gallery</h1>
           <p className="text-xl md:text-2xl">Explore Our Desert Adventures</p>
         </motion.div>
       </motion.section>
@@ -232,6 +236,8 @@ export default function GalleryPage() {
           </motion.div>
         )}
       </div>
+      
+      <Footer />
     </div>
   )
 }

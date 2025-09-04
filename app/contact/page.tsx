@@ -1,5 +1,5 @@
 import { Header } from "@/components/header"
-// import { Footer } from "@/components/footer"
+import { Footer } from "@/components/footer"
 import { BookingForm } from "@/components/booking-form"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -11,7 +11,7 @@ export default function ContactPage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="relative h-96 flex items-center justify-center overflow-hidden">
+        <section className="relative h-96 flex items-center justify-center overflow-hidden mt-20">
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
@@ -177,7 +177,7 @@ export default function ContactPage() {
           </div>
         </section>
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }

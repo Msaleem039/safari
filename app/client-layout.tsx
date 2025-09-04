@@ -1,33 +1,22 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { Toaster } from 'react-hot-toast';
+import type React from "react"
+import { usePathname } from 'next/navigation'
 
-export default function ClientLayout({ children }: { children: ReactNode }) {
-  const [mounted, setMounted] = useState(false);
-  const pathname = usePathname();
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <>{children}</>;
-  }
+export default function ClientLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
+  const hideHeaderFooter = pathname === '/login' || pathname?.startsWith('/admin')
 
   return (
-    <>
-      {children}
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          style: {
-            background: '#333',
-            color: '#fff',
-          },
-        }}
-      />
-    </>
-  );
+   
+      <div className="relative">
+        {!hideHeaderFooter && <Header />}
+        {children}
+        {!hideHeaderFooter && <Footer />}
+      </div>
+ 
+  )
 }
