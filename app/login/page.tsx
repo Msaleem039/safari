@@ -14,6 +14,11 @@ import Cookies from 'js-cookie';
 
 function AdminLoginInner() {
   const [isLogin, setIsLogin] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,21 +38,27 @@ function AdminLoginInner() {
     
     try {
       const apiCall = isLogin ? apiService.login : apiService.register;
+
       const result = await apiCall({
         email: formData.email,
         password: formData.password,
         name: formData.name,
         phone: formData.phone,
       });
-
+      
+      
       if (result.success && result.data) {
+   
+        
         Cookies.set('auth_token', result.data.token, { expires: 7 });
         Cookies.set('adminUser', JSON.stringify(result.data.user), { expires: 7 });
         router.push(redirectTo);
       } else {
+        console.log("❌ Login failed:", result.error);
         setError(result.error || 'Login failed. Please try again.');
       }
     } catch (error) {
+      console.log("💥 Network error caught:", error);
       setError('Network error. Please check your connection.');
     } finally {
       setLoading(false);
@@ -60,6 +71,24 @@ function AdminLoginInner() {
       [e.target.name]: e.target.value
     });
   };
+
+  if (!isClient) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center p-4">
+        <div className="animate-pulse">
+          <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
+            <div className="h-8 bg-gray-200 rounded mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded mb-6"></div>
+            <div className="space-y-4">
+              <div className="h-10 bg-gray-200 rounded"></div>
+              <div className="h-10 bg-gray-200 rounded"></div>
+              <div className="h-10 bg-gray-200 rounded"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center p-4 animate-fade-in">

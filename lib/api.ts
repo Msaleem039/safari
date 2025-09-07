@@ -62,20 +62,29 @@ class ApiService {
 
   private async handleResponse<T>(response: Response): Promise<ApiResponse<T>> {
     try {
+      console.log("🔍 API Response Debug:");
+      console.log("- Status:", response.status);
+      console.log("- OK:", response.ok);
+      console.log("- Status Text:", response.statusText);
+      
       const data = await response.json();
+      console.log("- Response Data:", data);
       
       if (response.ok) {
+        console.log("✅ Response is OK, returning success");
         return {
           success: true,
           data,
         };
       } else {
+        console.log("❌ Response not OK, returning error");
         return {
           success: false,
           error: data.message || `HTTP ${response.status}: ${response.statusText}`,
         };
       }
     } catch (error) {
+      console.log("💥 Error parsing response:", error);
       return {
         success: false,
         error: 'Network error. Please check your connection.',
@@ -84,8 +93,12 @@ class ApiService {
   }
 
   // Login API
-  async login(credentials: LoginCredentials): Promise<ApiResponse<LoginResponse>> {
+  login = async (credentials: LoginCredentials): Promise<ApiResponse<LoginResponse>> => {
     try {
+      console.log("🔍 Login API Debug:");
+      console.log("- URL:", `${API_BASE_URL}/login`);
+      console.log("- Credentials:", { email: credentials.email, hasPassword: !!credentials.password });
+      
       const response = await fetch(`${API_BASE_URL}/login`, {
         method: 'POST',
         headers: {
@@ -94,8 +107,24 @@ class ApiService {
         body: JSON.stringify(credentials),
       });
 
-      return this.handleResponse<LoginResponse>(response);
+      console.log("🔍 Fetch Response:");
+      console.log("- Response object:", response);
+      console.log("- Response status:", response.status);
+      console.log("- Response ok:", response.ok);
+
+      const raw = await this.handleResponse<any>(response);
+      console.log("🔍 Raw response from handleResponse:", raw);
+      
+      // Some backends wrap payload in { data: { token, user } }
+      if (raw.success) {
+        const payload = raw.data?.data ?? raw.data;
+        console.log("🔍 Final payload:", payload);
+        return { success: true, data: payload as LoginResponse };
+      }
+      console.log("🔍 Returning raw as error:", raw);
+      return raw as ApiResponse<LoginResponse>;
     } catch (error) {
+      console.log("💥 Login API catch block:", error);
       return {
         success: false,
         error: 'Network error. Please check your connection.',
@@ -104,7 +133,7 @@ class ApiService {
   }
 
   // Register API
-  async register(credentials: LoginCredentials): Promise<ApiResponse<LoginResponse>> {
+  register = async (credentials: LoginCredentials): Promise<ApiResponse<LoginResponse>> => {
     try {
       const response = await fetch(`${API_BASE_URL}/register`, {
         method: 'POST',
@@ -114,7 +143,12 @@ class ApiService {
         body: JSON.stringify(credentials),
       });
 
-      return this.handleResponse<LoginResponse>(response);
+      const raw = await this.handleResponse<any>(response);
+      if (raw.success) {
+        const payload = raw.data?.data ?? raw.data;
+        return { success: true, data: payload as LoginResponse };
+      }
+      return raw as ApiResponse<LoginResponse>;
     } catch (error) {
       return {
         success: false,
@@ -124,7 +158,7 @@ class ApiService {
   }
 
   // Get all products
-  async getAllProducts(): Promise<ApiResponse<Product[]>> {
+  getAllProducts = async (): Promise<ApiResponse<Product[]>> => {
     try {
       const response = await fetch(`${API_BASE_URL}/all`, {
         // Ensure fresh data in production (disable Next.js fetch cache)
@@ -154,7 +188,7 @@ class ApiService {
   }
 
   // Create product
-  async createProduct(product: Omit<Product, '_id'>): Promise<ApiResponse<Product>> {
+  createProduct = async (product: Omit<Product, '_id'>): Promise<ApiResponse<Product>> => {
     try {
       const response = await fetch(`${API_BASE_URL}/product`, {
         method: 'POST',
@@ -172,7 +206,7 @@ class ApiService {
   }
 
   // Update product
-  async updateProduct(id: string, product: Partial<Product>): Promise<ApiResponse<Product>> {
+  updateProduct = async (id: string, product: Partial<Product>): Promise<ApiResponse<Product>> => {
     try {
       const response = await fetch(`${API_BASE_URL}/product`, {
         method: 'PUT',
@@ -190,7 +224,7 @@ class ApiService {
   }
 
   // Delete product
-  async deleteProduct(id: string): Promise<ApiResponse<void>> {
+  deleteProduct = async (id: string): Promise<ApiResponse<void>> => {
     try {
       const response = await fetch(`${API_BASE_URL}/product/${id}`, {
         method: 'DELETE',
@@ -225,7 +259,7 @@ class ApiService {
   }
 
   // Forgot password
-  async forgotPassword(request: ForgotPasswordRequest): Promise<ApiResponse<any>> {
+  forgotPassword = async (request: ForgotPasswordRequest): Promise<ApiResponse<any>> => {
     try {
       const response = await fetch(`${API_BASE_URL}/forgot-password`, {
         method: 'POST',
@@ -245,7 +279,7 @@ class ApiService {
   }
 
   // Reset password
-  async resetPassword(request: ResetPasswordRequest): Promise<ApiResponse<any>> {
+  resetPassword = async (request: ResetPasswordRequest): Promise<ApiResponse<any>> => {
     try {
       const response = await fetch(`${API_BASE_URL}/reset-password/${request.token}`, {
         method: 'POST',
