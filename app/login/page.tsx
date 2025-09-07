@@ -1,7 +1,9 @@
+
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,7 +12,7 @@ import { Label } from '@/components/ui/label';
 import { apiService } from '@/lib/api';
 import Cookies from 'js-cookie';
 
-export default function AdminLogin() {
+function AdminLoginInner() {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -21,6 +23,8 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get('redirect') || '/admin';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +43,7 @@ export default function AdminLogin() {
       if (result.success && result.data) {
         Cookies.set('auth_token', result.data.token, { expires: 7 });
         Cookies.set('adminUser', JSON.stringify(result.data.user), { expires: 7 });
-        router.push('/admin/products');
+        router.push(redirectTo);
       } else {
         setError(result.error || 'Login failed. Please try again.');
       }
@@ -150,7 +154,14 @@ export default function AdminLogin() {
               </div>
             </form>
             
-            <div className="mt-6 text-center animate-fade-in">
+            <div className="mt-6 text-center animate-fade-in space-y-2">
+              {isLogin && (
+                <div>
+                  <Link href="/forgot-password" className="text-amber-600 hover:text-amber-700 text-sm">
+                    Forgot your password?
+                  </Link>
+                </div>
+              )}
               <button
                 onClick={() => setIsLogin(!isLogin)}
                 className="text-amber-600 hover:text-amber-700 text-sm"
@@ -162,5 +173,13 @@ export default function AdminLogin() {
         </Card>
       </div>
     </div>
+  );
+}
+
+export default function AdminLogin() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <AdminLoginInner />
+    </Suspense>
   );
 }

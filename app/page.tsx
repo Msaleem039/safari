@@ -8,6 +8,7 @@ import { ServicesSection } from "@/components/services-section"
 import { apiService, Product } from "@/lib/api"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { WelcomePopup } from "@/components/welcome-popup"
 
 export default async function HomePage() {
   const response = await apiService.getAllProducts()
@@ -24,6 +25,7 @@ export default async function HomePage() {
         <FAQ />
         <Footer/>
       </main>
+      <WelcomePopup />
     </div>
   )
 }

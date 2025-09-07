@@ -32,6 +32,15 @@ export interface LoginCredentials {
   phone?: string;
 }
 
+export interface ForgotPasswordRequest {
+  email: string;
+}
+
+export interface ResetPasswordRequest {
+  token: string;
+  password: string;
+}
+
 export interface LoginResponse {
   token: string;
   user: {
@@ -213,6 +222,46 @@ class ApiService {
   getCurrentUser(): any {
     const userData = Cookies.get('adminUser');
     return userData ? JSON.parse(userData) : null;
+  }
+
+  // Forgot password
+  async forgotPassword(request: ForgotPasswordRequest): Promise<ApiResponse<any>> {
+    try {
+      const response = await fetch(`${API_BASE_URL}/forgot-password`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request),
+      });
+
+      return this.handleResponse<any>(response);
+    } catch (error) {
+      return {
+        success: false,
+        error: 'Network error. Please check your connection.',
+      };
+    }
+  }
+
+  // Reset password
+  async resetPassword(request: ResetPasswordRequest): Promise<ApiResponse<any>> {
+    try {
+      const response = await fetch(`${API_BASE_URL}/reset-password/${request.token}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: request.password }),
+      });
+
+      return this.handleResponse<any>(response);
+    } catch (error) {
+      return {
+        success: false,
+        error: 'Network error. Please check your connection.',
+      };
+    }
   }
 }
 

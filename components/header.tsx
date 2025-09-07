@@ -27,7 +27,7 @@ export function Header() {
 
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 bg-white">
+    <header className="absolute top-0 left-0 right-0 z-50 bg-white sticky">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
